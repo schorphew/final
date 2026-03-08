@@ -10,8 +10,8 @@
 <style>
 :root{--steel:#1a2332;--steel2:#0d1520;--steel3:#243044;--steel4:#1e2d40;--accent:#e8500a;--accent2:#ff6b2b;--accent3:#c03d04;--light:#f0f2f5;--lighter:#f8f9fb;--text:#1a2332;--muted:#5a6475;--green:#1a7a4a;--red:#c0392b;}
 *{box-sizing:border-box;scroll-behavior:smooth;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;color:var(--text);background:var(--lighter);overflow-x:hidden;}
-body.dark{background:#0b0f14;color:#e6eef6;}
+body{font-family:'Inter',sans-serif;color:var(--text);background:linear-gradient(-45deg,#f8f9fb,#e8ecf1,#fdeee7,#f0f2f5);background-size:400% 400%;animation:bgRun 15s ease infinite;overflow-x:hidden;}
+body.dark{background:linear-gradient(-45deg,#0b0f14,#131b27,#1a1008,#0f1520);background-size:400% 400%;animation:bgRun 15s ease infinite;color:#e6eef6;}
 body.dark{--lighter:#0b0f14;--light:#0f1520;--text:#e6eef6;--muted:#8a9bb0;}
 body.dark .navbar{background:rgba(0,0,0,.85)!important;}
 body.dark .prc{background:#111c2a!important;border-color:#1e2d40!important;color:#e6eef6!important;}
@@ -115,6 +115,8 @@ h1,h2,h3,h4{font-family:'Barlow Condensed',sans-serif;font-weight:800;letter-spa
 .ripple-wrap{position:relative;overflow:hidden;}
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);animation:rippleAnim .5s linear;pointer-events:none;}
 @keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
+@keyframes bgRun{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media(prefers-reduced-motion:reduce){body,body.dark{animation:none;}}
 .cart-wrap{position:relative;display:inline-flex;cursor:pointer;}
 .cart-badge{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#fff;width:17px;height:17px;border-radius:50%;font-size:.58rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
 .overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9990;opacity:0;pointer-events:none;transition:opacity .35s;}
@@ -287,6 +289,26 @@ section{padding:96px 0;}
 .stock-fill{height:100%;border-radius:2px;transition:width 1.5s ease;}
 .btn-cart{background:transparent;border:1.5px solid rgba(232,80,10,.3);color:var(--accent);border-radius:3px;padding:.5rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;width:100%;transition:all .3s;margin-top:.5rem;cursor:pointer;position:relative;overflow:hidden;}
 .btn-cart:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* BUNDLE DEALS */
+#bundles{background:var(--steel2);border-top:1px solid rgba(255,255,255,.05);}
+.bundle-card{background:var(--steel3);border-radius:8px;border:1px solid rgba(255,255,255,.07);padding:1.5rem;height:100%;display:flex;flex-direction:column;transition:all .4s;position:relative;overflow:hidden;}
+.bundle-card:hover{border-color:rgba(232,80,10,.3);box-shadow:0 20px 50px rgba(0,0,0,.4);transform:translateY(-6px);}
+.bundle-tag{position:absolute;top:0;right:0;background:var(--accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.3rem .9rem;border-radius:0 0 0 8px;}
+.bundle-name{font-family:'Barlow Condensed',sans-serif;font-size:1.25rem;font-weight:700;color:#fff;letter-spacing:.5px;margin-bottom:.3rem;}
+.bundle-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:1rem;}
+.bundle-products{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1rem;flex:1;}
+.bundle-product{display:flex;align-items:center;gap:.7rem;background:rgba(255,255,255,.04);border-radius:5px;padding:.45rem .65rem;}
+.bundle-product img{width:38px;height:38px;border-radius:4px;object-fit:cover;flex-shrink:0;}
+.bundle-product-info{flex:1;min-width:0;}
+.bundle-product-name{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;color:#fff;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bundle-product-price{font-size:.7rem;color:rgba(255,255,255,.35);}
+.bundle-pricing{border-top:1px solid rgba(255,255,255,.07);padding-top:.8rem;margin-bottom:.7rem;}
+.bundle-original{font-size:.8rem;color:rgba(255,255,255,.3);text-decoration:line-through;}
+.bundle-final{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--accent);line-height:1;}
+.bundle-savings{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-top:.2rem;}
+.btn-bundle{background:var(--accent);color:#fff;border:none;border-radius:3px;padding:.55rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;width:100%;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.btn-bundle:hover{background:var(--accent2);box-shadow:0 6px 20px rgba(232,80,10,.35);}
 
 /* PRODUCT MODAL */
 .prod-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9995;opacity:0;pointer-events:none;transition:opacity .3s;}
@@ -709,15 +731,206 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
 .stg.vis>*:nth-child(6){opacity:1;transform:none;transition-delay:.34s;}
 .stg.vis>*:nth-child(7){opacity:1;transform:none;transition-delay:.4s;}
 .stg.vis>*:nth-child(8){opacity:1;transform:none;transition-delay:.46s;}
+.stg.vis>*:nth-child(9){opacity:1;transform:none;transition-delay:.52s;}
+.stg.vis>*:nth-child(10){opacity:1;transform:none;transition-delay:.58s;}
+.stg.vis>*:nth-child(11){opacity:1;transform:none;transition-delay:.64s;}
+.stg.vis>*:nth-child(12){opacity:1;transform:none;transition-delay:.7s;}
+.stg.vis>*:nth-child(n+13){opacity:1;transform:none;transition-delay:.76s;}
+
+/* ═══ PARTICLE CANVAS ═══ */
+#particleCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+/* ═══ AURORA GRADIENT BACKGROUND ═══ */
+.aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;animation:auroraMove 12s ease-in-out infinite alternate;}
+.aurora-blob.ab1{width:500px;height:500px;background:var(--accent);top:-10%;left:10%;animation-duration:14s;}
+.aurora-blob.ab2{width:400px;height:400px;background:#ff6b2b;bottom:-5%;right:15%;animation-delay:-4s;animation-duration:16s;}
+.aurora-blob.ab3{width:350px;height:350px;background:#c03d04;top:40%;left:60%;animation-delay:-8s;animation-duration:18s;}
+@keyframes auroraMove{0%{transform:translate(0,0) scale(1);}25%{transform:translate(40px,-30px) scale(1.1);}50%{transform:translate(-20px,40px) scale(.95);}75%{transform:translate(30px,20px) scale(1.05);}100%{transform:translate(-40px,-20px) scale(1);}
+}
+body.dark .aurora-blob{opacity:.07;}
+
+/* ═══ FLOATING GEOMETRIC SHAPES ═══ */
+.geo-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.geo{position:absolute;border:1.5px solid rgba(232,80,10,.12);opacity:.35;animation:geoDrift 20s ease-in-out infinite;}
+.geo.circle{border-radius:50%;}
+.geo.diamond{transform:rotate(45deg);}
+.geo.g1{width:60px;height:60px;top:15%;left:8%;animation-duration:22s;}
+.geo.g2{width:35px;height:35px;top:60%;right:12%;animation-delay:-5s;animation-duration:18s;}
+.geo.g3{width:80px;height:80px;bottom:20%;left:45%;animation-delay:-10s;animation-duration:25s;}
+.geo.g4{width:25px;height:25px;top:30%;right:30%;animation-delay:-7s;animation-duration:15s;}
+.geo.g5{width:45px;height:45px;bottom:35%;left:20%;animation-delay:-3s;animation-duration:20s;}
+.geo.g6{width:55px;height:55px;top:70%;right:5%;animation-delay:-12s;animation-duration:24s;}
+@keyframes geoDrift{0%,100%{transform:translateY(0) rotate(0deg);}25%{transform:translateY(-20px) rotate(90deg);}50%{transform:translateY(10px) rotate(180deg);}75%{transform:translateY(-15px) rotate(270deg);}
+}
+.geo.diamond{animation-name:geoDriftD;}
+@keyframes geoDriftD{0%,100%{transform:rotate(45deg) translateY(0);}25%{transform:rotate(135deg) translateY(-20px);}50%{transform:rotate(225deg) translateY(10px);}75%{transform:rotate(315deg) translateY(-15px);}
+}
+
+/* ═══ BUTTON GLOW PULSE ═══ */
+.btn-forge{box-shadow:0 0 0 rgba(232,80,10,0);animation:btnGlow 3s ease-in-out infinite;}
+@keyframes btnGlow{0%,100%{box-shadow:0 0 8px rgba(232,80,10,.1),0 0 0 rgba(232,80,10,0);}50%{box-shadow:0 0 20px rgba(232,80,10,.4),0 4px 30px rgba(232,80,10,.25);}
+}
+.btn-forge:hover{animation:none;box-shadow:0 14px 40px rgba(232,80,10,.5);}
+
+/* ═══ TILT CARD EFFECT ═══ */
+.pc .pb{transition:transform .4s ease;}
+
+/* ═══ GRADIENT TEXT SHIMMER ═══ */
+.hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2),#ff9a56,var(--accent));background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:textShimmer 4s ease-in-out infinite;}
+@keyframes textShimmer{0%{background-position:100% 50%;}50%{background-position:0% 50%;}100%{background-position:100% 50%;}
+}
+
+/* ═══ ACCENT LINE PULSE ═══ */
+.hero-accent-line{animation:accentPulse 3s ease-in-out infinite;}
+@keyframes accentPulse{0%,100%{opacity:.6;box-shadow:0 0 10px rgba(232,80,10,.2);}50%{opacity:1;box-shadow:0 0 25px rgba(232,80,10,.5);}
+}
+
+/* ═══ FLOATING BADGE GLOW ═══ */
+.fc{box-shadow:0 8px 32px rgba(0,0,0,.4);transition:box-shadow .4s ease;}
+.fc::after{content:'';position:absolute;inset:-1px;border-radius:8px;background:linear-gradient(135deg,rgba(232,80,10,.2),transparent);opacity:0;transition:opacity .4s;z-index:-1;}
+.fc:hover::after{opacity:1;}
+
+/* ═══ SECTION DIVIDER ANIMATION ═══ */
+.divbar{position:relative;overflow:hidden;}
+.divbar::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:divbarShine 3s ease-in-out infinite;}
+@keyframes divbarShine{0%{left:-100%;}100%{left:200%;}
+}
+
+/* ═══ PILL HOVER BOUNCE ═══ */
+.pill{transition:all .3s cubic-bezier(.34,1.56,.64,1);}
+.pill:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 8px 24px rgba(26,35,50,.12);}
+
+/* ═══ FEATURE CARD ICON SPIN ═══ */
+.fc2:hover .fic{transform:rotateY(180deg);transition:transform .6s ease;}
+
+/* ═══ PRICING CARD SHINE ═══ */
+.prc{overflow:hidden;}
+.prc::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.03) 50%,transparent 60%);transform:rotate(0deg);transition:transform .8s ease;}
+.prc:hover::after{transform:rotate(180deg);}
+
+/* ═══ SMOOTH CURSOR GLOW ═══ */
+.hero-cursor-glow{position:absolute;width:350px;height:350px;background:radial-gradient(circle,rgba(232,80,10,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:left .3s ease,top .3s ease;opacity:0;}
+.hero:hover .hero-cursor-glow{opacity:1;}
+
+/* ═══ PRODUCT CARD IMAGE SHINE ═══ */
+.pi::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);z-index:2;transition:left .6s ease;}
+.pc:hover .pi::after{left:150%;}
+
+/* ═══ STAT NUMBER GLOW ═══ */
+.hstat .v span{text-shadow:0 0 20px rgba(232,80,10,.5);transition:text-shadow .3s ease;}
+.hstat:hover .v span{text-shadow:0 0 30px rgba(232,80,10,.8),0 0 60px rgba(232,80,10,.3);}
+
+/* ═══ TESTIMONIAL CARD HOVER ═══ */
+.tc{transition:all .4s cubic-bezier(.16,1,.3,1);}
+.tc:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.tav img{transition:transform .4s ease;}
+.tc:hover .tav img{transform:scale(1.15) rotate(5deg);}
+
+/* ═══ NAVBAR LINK UNDERLINE ═══ */
+.nav-link::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:var(--accent);transition:width .3s ease,left .3s ease;}
+.nav-link:hover::after,.nav-link.active::after{width:60%;left:20%;}
+
+/* ═══ CHAT BUBBLE BOUNCE ═══ */
+.chat-bubble{animation:chatBounce 2s ease-in-out infinite;}
+@keyframes chatBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}
+}
+.chat-bubble:hover{animation:none;transform:scale(1.1);}
+
+/* ═══ STOCK BAR ANIMATED STRIPES ═══ */
+.stock-fill{background-image:linear-gradient(45deg,rgba(255,255,255,.1) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.1) 75%,transparent 75%,transparent)!important;background-size:20px 20px;animation:stockStripes 1s linear infinite;}
+@keyframes stockStripes{0%{background-position:0 0;}100%{background-position:20px 0;}
+}
+
+/* ═══ WISHLIST HEART BEAT ═══ */
+.wish-btn.active i{animation:heartBeat 1s ease-in-out;}
+@keyframes heartBeat{0%{transform:scale(1);}15%{transform:scale(1.3);}30%{transform:scale(1);}45%{transform:scale(1.2);}60%{transform:scale(1);}
+}
+
+/* ═══ COUNTER SECTION PARTICLES ═══ */
+.cs{position:relative;}
+.cs::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(232,80,10,.08) 1px,transparent 1px);background-size:30px 30px;animation:csParticles 15s linear infinite;}
+@keyframes csParticles{0%{background-position:0 0;}100%{background-position:30px 30px;}
+}
 
 @keyframes spin{to{transform:rotate(360deg);}}
 @media(max-width:991px){.hero h1{font-size:3.5rem;}.tc{flex:0 0 calc(100% - 1.5rem);}.cart-drawer,.points-panel{width:100vw;}.prod-modal{width:95vw;}.pay-modal{width:95vw;}.compare-modal{max-width:98vw;}.chat-window{width:95vw;right:10px;bottom:130px;}}
 @media(max-width:576px){.hero h1{font-size:2.8rem;}.hero-stats{max-width:100%;}.sticky-atc-inner{gap:.5rem;}.compare-bar-inner{gap:.5rem;}}
+
+/* ═══ ANNOUNCEMENT BAR ═══ */
+.announcement-bar{background:var(--accent);color:#fff;text-align:center;padding:8px 0;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:1px;position:relative;z-index:1050;overflow:hidden;}
+.announcement-bar .ann-track{display:flex;animation:ann-scroll 20s linear infinite;white-space:nowrap;}
+.announcement-bar .ann-item{flex-shrink:0;padding:0 40px;display:flex;align-items:center;gap:6px;}
+.announcement-bar .ann-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:1rem;}
+@keyframes ann-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+body.dark .announcement-bar{background:#1a2332;border-bottom:1px solid rgba(232,80,10,.3);}
+
+/* ═══ FREE SHIPPING BAR ═══ */
+.shipping-bar{background:rgba(26,122,74,.08);border:1px solid rgba(26,122,74,.2);border-radius:8px;padding:.7rem 1rem;margin-bottom:.8rem;}
+.shipping-bar .sb-text{font-size:.78rem;color:var(--green);font-weight:600;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;}
+.shipping-bar .sb-track{height:6px;background:rgba(26,122,74,.12);border-radius:3px;overflow:hidden;}
+.shipping-bar .sb-fill{height:100%;background:var(--green);border-radius:3px;transition:width .4s ease;}
+.shipping-bar.reached{background:rgba(26,122,74,.12);}
+.shipping-bar.reached .sb-text{color:var(--green);}
+body.dark .shipping-bar{background:rgba(26,122,74,.1);border-color:rgba(26,122,74,.25);}
+
+/* ═══ ORDER HISTORY ═══ */
+.order-history-panel{position:fixed;top:0;right:-440px;width:440px;height:100vh;background:var(--steel);z-index:1060;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column;}
+.order-history-panel.open{right:0;}
+.oh-head{padding:1.2rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;}
+.oh-head h5{color:#fff;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:1.1rem;margin:0;}
+.oh-close{background:none;border:none;color:rgba(255,255,255,.4);font-size:1.3rem;cursor:pointer;}
+.oh-body{flex:1;overflow-y:auto;padding:1rem 1.5rem;}
+.oh-order{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:1rem;margin-bottom:.8rem;}
+.oh-order-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+.oh-order-num{font-family:'Bebas Neue',sans-serif;color:var(--accent);font-size:.9rem;letter-spacing:1px;}
+.oh-order-date{font-size:.7rem;color:rgba(255,255,255,.35);}
+.oh-order-status{font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:3px;background:rgba(26,122,74,.15);color:var(--green);font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;}
+.oh-order-items{font-size:.78rem;color:rgba(255,255,255,.5);margin:.4rem 0;}
+.oh-order-total{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:1rem;letter-spacing:1px;}
+@media(max-width:991px){.order-history-panel{width:100vw;}}
+
+/* ═══ IMAGE ZOOM ═══ */
+.pm-img-wrap{position:relative;overflow:hidden;border-radius:12px;cursor:zoom-in;}
+.pm-img-wrap img{transition:transform .3s ease;}
+.pm-img-wrap:hover img{transform:scale(1.5);}
+.pm-img-wrap.zoomed img{transform-origin:var(--zoom-x,center) var(--zoom-y,center);}
+
+/* ═══ MOBILE BOTTOM NAV ═══ */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:1055;background:var(--steel);border-top:1px solid rgba(255,255,255,.08);padding:6px 0 max(6px,env(safe-area-inset-bottom));}
+.mobile-nav-inner{display:flex;justify-content:space-around;align-items:center;}
+.mob-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:rgba(255,255,255,.45);font-size:.62rem;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.5px;cursor:pointer;padding:4px 12px;position:relative;transition:color .2s;}
+.mob-nav-item i{font-size:1.2rem;}
+.mob-nav-item.active,.mob-nav-item:hover{color:var(--accent);}
+.mob-nav-item .mob-badge{position:absolute;top:0;right:4px;background:var(--accent);color:#fff;font-size:.5rem;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;}
+body.dark .mobile-nav{background:#0b0f14;border-color:rgba(255,255,255,.06);}
+@media(max-width:991px){.mobile-nav{display:block;}.chat-bubble{bottom:70px;}}
+
+/* ═══ REVIEW FORM ═══ */
+.pm-review-form{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);}
+.pm-review-form h6{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;color:var(--accent);margin-bottom:.8rem;}
+.review-stars-input{display:flex;gap:4px;margin-bottom:.6rem;}
+.review-stars-input button{background:none;border:none;font-size:1.3rem;color:rgba(255,255,255,.2);cursor:pointer;padding:0;transition:color .2s;}
+.review-stars-input button.active{color:#f4c542;}
+.review-textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.6rem;color:#fff;font-family:'Inter',sans-serif;font-size:.82rem;resize:vertical;min-height:60px;}
+.review-textarea::placeholder{color:rgba(255,255,255,.25);}
+.review-textarea:focus{outline:none;border-color:var(--accent);}
+.review-submit{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:.5rem 1.2rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:1px;cursor:pointer;margin-top:.5rem;}
+.review-submit:hover{background:var(--accent2);}
+.user-reviews{margin-top:1rem;}
+.user-review{background:rgba(255,255,255,.03);border-radius:6px;padding:.7rem;margin-bottom:.5rem;}
+.user-review .ur-stars{color:#f4c542;font-size:.8rem;}
+.user-review .ur-text{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:.3rem;}
+.user-review .ur-meta{font-size:.68rem;color:rgba(255,255,255,.25);margin-top:.2rem;}
+body.dark .review-textarea{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#e6eef6;}
 </style>
 </head>
 <body>
 
 <div id="progress-bar"></div>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particleCanvas"></canvas>
 
 <!-- TOAST -->
 <div class="toast-c" id="toast">
@@ -745,7 +958,7 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
 <div class="prod-modal-overlay" id="pmOverlay" onclick="closePM()"></div>
 <div class="prod-modal" id="prodModal">
   <button class="pm-close" onclick="closePM()"><i class="bi bi-x-lg"></i></button>
-  <img id="pm-img" class="pm-img" src="" alt=""/>
+  <div class="pm-img-wrap"><img id="pm-img" class="pm-img" src="" alt=""/></div>
   <div class="pm-body">
     <div class="pm-tag" id="pm-tag"></div>
     <div class="pm-name" id="pm-name"></div>
@@ -783,6 +996,20 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
       <button class="pm-wish-btn" id="pm-wish-btn" onclick="pmToggleWish()"><i class="bi bi-heart"></i></button>
     </div>
     <button class="compare-btn-pm ripple-wrap" id="compare-btn-pm" onclick="toggleCompare()"><i class="bi bi-arrow-left-right me-1"></i>Add to Compare</button>
+    <!-- REVIEW FORM -->
+    <div class="pm-review-form">
+      <h6><i class="bi bi-chat-square-text me-2"></i>Write a Review</h6>
+      <div class="review-stars-input" data-rating="0">
+        <button onclick="setReviewStar(1)">☆</button>
+        <button onclick="setReviewStar(2)">☆</button>
+        <button onclick="setReviewStar(3)">☆</button>
+        <button onclick="setReviewStar(4)">☆</button>
+        <button onclick="setReviewStar(5)">☆</button>
+      </div>
+      <textarea class="review-textarea" id="reviewText" placeholder="Share your experience with this product…"></textarea>
+      <button class="review-submit" onclick="submitReview()">Submit Review</button>
+      <div class="user-reviews" id="userReviews"></div>
+    </div>
   </div>
 </div>
 
@@ -897,6 +1124,13 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
   <div class="pp-body" id="ppBody"></div>
 </div>
 
+<!-- ORDER HISTORY PANEL -->
+<div class="overlay-bg" id="ohOverlay" onclick="toggleOrderHistory()"></div>
+<div class="order-history-panel" id="ohPanel" style="pointer-events:none;">
+  <div class="oh-head"><h5><i class="bi bi-receipt me-2"></i>Order History</h5><button class="oh-close" onclick="toggleOrderHistory()">×</button></div>
+  <div class="oh-body" id="ohBody"><div class="cd-empty"><i class="bi bi-receipt"></i>No orders yet</div></div>
+</div>
+
 <!-- ALL PRODUCTS DRAWER -->
 <div class="all-products-drawer" id="allProductsDrawer">
   <div class="apd-head">
@@ -908,6 +1142,7 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
     <button class="apd-filter" data-apf="face" onclick="filterAPD(this,'face')">Face Care</button>
     <button class="apd-filter" data-apf="beard" onclick="filterAPD(this,'beard')">Beard Care</button>
     <button class="apd-filter" data-apf="body" onclick="filterAPD(this,'body')">Body</button>
+    <button class="apd-filter" data-apf="research" onclick="filterAPD(this,'research')">Research</button>
     <select class="apd-sort" onchange="sortAPD(this.value)">
       <option value="default">Sort: Default</option>
       <option value="price-asc">Price: Low → High</option>
@@ -927,6 +1162,11 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
   <div class="cd-head"><h5><i class="bi bi-bag me-2"></i>Your Cart (<span id="cdCount">0</span>)</h5><button class="cd-close" onclick="toggleCart()">×</button></div>
   <div class="cd-body" id="cdBody"><div class="cd-empty"><i class="bi bi-bag"></i>Your cart is empty</div></div>
   <div class="cd-foot" id="cdFoot" style="display:none">
+    <!-- FREE SHIPPING BAR -->
+    <div class="shipping-bar" id="shippingBar">
+      <div class="sb-text"><i class="bi bi-truck"></i><span id="sbText">Add $75.00 more for FREE shipping!</span></div>
+      <div class="sb-track"><div class="sb-fill" id="sbFill" style="width:0%"></div></div>
+    </div>
     <!-- LOYALTY BANNER -->
     <div class="loyalty-banner" id="loyaltyBanner" style="display:none;">
       <div class="lp-icon">⭐</div>
@@ -979,6 +1219,21 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
   </div>
 </div>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar" id="announcementBar">
+  <div class="ann-track">
+    <div class="ann-item">🔥 FREE SHIPPING on orders over $75</div>
+    <div class="ann-item">⚡ Use code FORGE20 for 20% off</div>
+    <div class="ann-item">🎁 Buy 2, Get 1 Free — Limited Time</div>
+    <div class="ann-item">⭐ Join FORGE Rewards — Earn Points on Every Order</div>
+    <div class="ann-item">🔥 FREE SHIPPING on orders over $75</div>
+    <div class="ann-item">⚡ Use code FORGE20 for 20% off</div>
+    <div class="ann-item">🎁 Buy 2, Get 1 Free — Limited Time</div>
+    <div class="ann-item">⭐ Join FORGE Rewards — Earn Points on Every Order</div>
+  </div>
+  <button class="ann-close" onclick="document.getElementById('announcementBar').style.display='none'" title="Close">×</button>
+</div>
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg sticky-top" id="nav">
   <div class="container">
@@ -1003,6 +1258,10 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
           <i class="bi bi-stars"></i>
           <span id="navPts" style="position:absolute;top:-6px;right:-8px;background:var(--accent);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:.55rem;padding:.05rem .3rem;border-radius:3px;letter-spacing:.5px;display:none;"></span>
         </button>
+        <button onclick="toggleOrderHistory()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;position:relative;" title="Orders">
+          <i class="bi bi-receipt"></i>
+          <span id="navOrders" style="position:absolute;top:-6px;right:-8px;background:var(--accent);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:.55rem;padding:.05rem .3rem;border-radius:3px;letter-spacing:.5px;display:none;"></span>
+        </button>
         <div style="position:relative;cursor:pointer;" onclick="toggleWishPanel()">
           <i class="bi bi-heart text-white fs-5"></i>
           <span class="cart-badge" id="wishCount" style="display:none">0</span>
@@ -1021,6 +1280,9 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div><div class="hero-lines"></div><div class="hero-accent-line"></div><div class="hero-glow"></div>
+  <div class="hero-cursor-glow" id="heroCursorGlow"></div>
+  <div class="aurora"><div class="aurora-blob ab1"></div><div class="aurora-blob ab2"></div><div class="aurora-blob ab3"></div></div>
+  <div class="geo-shapes"><div class="geo circle g1"></div><div class="geo diamond g2"></div><div class="geo circle g3"></div><div class="geo diamond g4"></div><div class="geo circle g5"></div><div class="geo diamond g6"></div></div>
   <div class="container hero-content">
     <div class="row align-items-center g-5">
       <div class="col-lg-6">
@@ -1062,6 +1324,7 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
       <button class="prod-tab" data-filter="face">Face Care</button>
       <button class="prod-tab" data-filter="beard">Beard Care</button>
       <button class="prod-tab" data-filter="body">Body</button>
+      <button class="prod-tab" data-filter="research">Research</button>
     </div>
     <div class="row g-4 stg" id="prodGrid">
       <div class="col-sm-6 col-lg-3" data-cat="face"><div class="pc"><div class="pi" onclick="openPM(0)"><img src="https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=600&q=82" alt="Face Wash" loading="lazy"/><div class="pi-ov"></div><span class="ptag hot">Bestseller</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Daily Face Wash',38,'https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(0)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(428)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(0)">Daily Face Wash</div><div class="psub">200ml · All Skin Types</div><div class="pdesc">Deep-cleanse formula engineered for male skin. Activated Charcoal and Salicylic Acid strip excess oil without stripping moisture.</div><div class="ptags"><span class="ptag-item">Oil Control</span><span class="ptag-item">Deep Clean</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:var(--accent)">72%</span></div><div class="stock-bar"><div class="stock-fill" style="width:72%;background:var(--accent)"></div></div></div><div><span class="pprice">$38</span><span class="pold">$48</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Daily Face Wash',38,'https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
@@ -1072,7 +1335,20 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
       <div class="col-sm-6 col-lg-3" data-cat="body"><div class="pc"><div class="pi" onclick="openPM(5)"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=82" alt="Body Wash" loading="lazy"/><div class="pi-ov"></div><span class="ptag hot">Popular</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Performance Body Wash',34,'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(5)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(312)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(5)">Performance Body Wash</div><div class="psub">300ml · Energizing</div><div class="pdesc">Menthol and Eucalyptus for instant alertness. Shea Butter and Coconut Oil condition skin.</div><div class="ptags"><span class="ptag-item">Energizing</span><span class="ptag-item">Cooling</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:var(--accent)">81%</span></div><div class="stock-bar"><div class="stock-fill" style="width:81%;background:var(--accent)"></div></div></div><div><span class="pprice">$34</span><span class="pold">$42</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Performance Body Wash',34,'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
       <div class="col-sm-6 col-lg-3" data-cat="face"><div class="pc"><div class="pi" onclick="openPM(6)"><img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=600&q=82" alt="Eye Cream" loading="lazy"/><div class="pi-ov"></div><span class="ptag new_">New</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Dark Circle Eye Cream',58,'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(6)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(189)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(6)">Dark Circle Eye Cream</div><div class="psub">15ml · Revitalizing</div><div class="pdesc">Retinol 0.5%, Peptide Complex, and Vitamin K visibly reduce under-eye bags in 2 weeks.</div><div class="ptags"><span class="ptag-item">Anti-Dark Circle</span><span class="ptag-item">Retinol</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:#f4c542">52%</span></div><div class="stock-bar"><div class="stock-fill" style="width:52%;background:#f4c542"></div></div></div><div><span class="pprice">$58</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Dark Circle Eye Cream',58,'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
       <div class="col-sm-6 col-lg-3" data-cat="beard"><div class="pc"><div class="pi" onclick="openPM(7)"><img src="https://images.unsplash.com/photo-1520975954732-35dd22299614?w=600&q=82" alt="Beard Balm" loading="lazy"/><div class="pi-ov"></div><span class="ptag hot">Bestseller</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Beard Styling Balm',36,'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(7)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(241)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(7)">Beard Styling Balm</div><div class="psub">60g · Medium Hold</div><div class="pdesc">Medium-hold balm keeping your beard styled all day. Beeswax and Shea Butter condition as you style.</div><div class="ptags"><span class="ptag-item">Medium Hold</span><span class="ptag-item">No Flake</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:var(--accent)">90%</span></div><div class="stock-bar"><div class="stock-fill" style="width:90%;background:var(--accent)"></div></div></div><div><span class="pprice">$36</span><span class="pold">$44</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Beard Styling Balm',36,'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
+      <div class="col-sm-6 col-lg-3" data-cat="research"><div class="pc"><div class="pi" onclick="openPM(8)"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=82" alt="Peptide Complex" loading="lazy"/><div class="pi-ov"></div><span class="ptag sale">Sale</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Peptide Anti-Aging Complex',89,'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(8)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(342)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(8)">Peptide Anti-Aging Complex</div><div class="psub">30ml · Clinical Grade</div><div class="pdesc">Clinically-proven peptide complex. Matrixyl 3000 and Argireline reduce fine lines by up to 45% in 8 weeks.</div><div class="ptags"><span class="ptag-item">Clinical</span><span class="ptag-item">Anti-Aging</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:var(--accent)">68%</span></div><div class="stock-bar"><div class="stock-fill" style="width:68%;background:var(--accent)"></div></div></div><div><span class="pprice">$89</span><span class="pold">$110</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Peptide Anti-Aging Complex',89,'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
+      <div class="col-sm-6 col-lg-3" data-cat="research"><div class="pc"><div class="pi" onclick="openPM(9)"><img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=82" alt="Stem Cell Serum" loading="lazy"/><div class="pi-ov"></div><span class="ptag new_">New</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Stem Cell Recovery Serum',95,'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(9)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(198)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(9)">Stem Cell Recovery Serum</div><div class="psub">25ml · Bio-Active</div><div class="pdesc">Plant stem cell technology backed by published research. Protects and regenerates skin at the cellular level.</div><div class="ptags"><span class="ptag-item">Stem Cell</span><span class="ptag-item">Research-Backed</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:#f4c542">38%</span></div><div class="stock-bar"><div class="stock-fill" style="width:38%;background:#f4c542"></div></div></div><div><span class="pprice">$95</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Stem Cell Recovery Serum',95,'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
+      <div class="col-sm-6 col-lg-3" data-cat="research"><div class="pc"><div class="pi" onclick="openPM(10)"><img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&q=82" alt="Niacinamide" loading="lazy"/><div class="pi-ov"></div><span class="ptag sale">Sale</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Niacinamide Lab Concentrate',45,'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(10)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★☆ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(264)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(10)">Niacinamide Lab Concentrate</div><div class="psub">30ml · 10% Concentration</div><div class="pdesc">Laboratory-grade Niacinamide validated in a 12-week clinical trial. Shrinks pores and controls sebum.</div><div class="ptags"><span class="ptag-item">Lab Grade</span><span class="ptag-item">Clinical Trial</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:var(--accent)">75%</span></div><div class="stock-bar"><div class="stock-fill" style="width:75%;background:var(--accent)"></div></div></div><div><span class="pprice">$45</span><span class="pold">$55</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Niacinamide Lab Concentrate',45,'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
+      <div class="col-sm-6 col-lg-3" data-cat="research"><div class="pc"><div class="pi" onclick="openPM(11)"><img src="https://images.unsplash.com/photo-1570194065650-d99fb4ee38f2?w=600&q=82" alt="Retinol Treatment" loading="lazy"/><div class="pi-ov"></div><span class="ptag hot">Bestseller</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish(this,'Retinol Clinical Treatment',72,'https://images.unsplash.com/photo-1570194065650-d99fb4ee38f2?w=100&q=80')"><i class="bi bi-heart"></i></button><button class="qv" onclick="event.stopPropagation();openPM(11)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">★★★★★ <span style="color:rgba(255,255,255,.28);font-size:.65rem">(412)</span></div><div class="pname" style="cursor:pointer" onclick="openPM(11)">Retinol Clinical Treatment</div><div class="psub">30ml · 0.5% Retinol</div><div class="pdesc">Encapsulated retinol with time-release technology. Published in the British Journal of Dermatology.</div><div class="ptags"><span class="ptag-item">Retinol</span><span class="ptag-item">Published Research</span></div><div class="stock-wrap"><div class="stock-label"><span>Stock</span><span style="color:var(--accent)">82%</span></div><div class="stock-bar"><div class="stock-fill" style="width:82%;background:var(--accent)"></div></div></div><div><span class="pprice">$72</span></div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,'Retinol Clinical Treatment',72,'https://images.unsplash.com/photo-1570194065650-d99fb4ee38f2?w=100&q=80')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>
     </div>
+    <div class="text-center mt-5 rev"><button class="btn-forge ripple-wrap" onclick="openAllProducts()"><i class="bi bi-grid me-2"></i>Browse All Products</button></div>
+  </div>
+</section>
+
+<!-- BUNDLE DEALS -->
+<section id="bundles">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;">
+    <div class="text-center mb-5 rev"><span class="s-tag">Special Offers</span><h2 class="s-h lt">Bundle Deals — <em>Buy Together & Save</em></h2><div class="divbar cx"></div><p style="color:rgba(255,255,255,.35);font-size:.85rem;margin-top:.8rem;max-width:520px;margin-left:auto;margin-right:auto;">Combine complementary products and save. Each bundle is curated for the best results.</p></div>
+    <div class="row g-4 stg" id="bundleGrid"></div>
   </div>
 </section>
 
@@ -1125,20 +1401,35 @@ footer a.flink:hover{color:var(--accent);padding-left:.4rem;}
 <!-- FOOTER -->
 <footer><div class="container"><div class="row g-4"><div class="col-lg-4 mb-2"><div class="flogo mb-3">FOR<span>GE</span></div><p style="font-size:.81rem;color:rgba(255,255,255,.32);max-width:255px;line-height:1.7;">Built for men who demand performance. No compromise. No filler. Just results.</p><div class="mt-3"><a href="#" class="soc"><i class="bi bi-instagram"></i></a><a href="#" class="soc"><i class="bi bi-twitter-x"></i></a><a href="#" class="soc"><i class="bi bi-tiktok"></i></a><a href="#" class="soc"><i class="bi bi-youtube"></i></a></div></div><div class="col-6 col-lg-2"><h6>Shop</h6><a href="#" class="flink">Face Wash</a><a href="#" class="flink">Moisturizers</a><a href="#" class="flink">Beard Care</a><a href="#" class="flink">Serums</a><a href="#" class="flink">Gift Sets</a></div><div class="col-6 col-lg-2"><h6>Company</h6><a href="#" class="flink">Our Story</a><a href="#" class="flink">Ingredients</a><a href="#" class="flink">Sustainability</a><a href="#" class="flink">Careers</a></div><div class="col-lg-4"><h6>Newsletter</h6><p style="font-size:.79rem;color:rgba(255,255,255,.32);line-height:1.65">Grooming tips, exclusive drops, and early access — delivered to your inbox.</p><div class="nl-wrap mt-2"><input type="email" class="nl-in" id="nlEmail" placeholder="Enter your email"/><button class="nl-btn" onclick="subscribeNL()">Subscribe</button></div></div></div><div class="fbot"><p>© 2025 FORGE Grooming. All rights reserved.</p><div class="d-flex gap-3"><a href="#" class="flink" style="display:inline;margin:0">Privacy</a><a href="#" class="flink" style="display:inline;margin:0">Terms</a><a href="#" class="flink" style="display:inline;margin:0">Cookies</a></div></div></div></footer>
 
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-inner">
+    <button class="mob-nav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-house"></i>Home</button>
+    <button class="mob-nav-item" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><i class="bi bi-grid"></i>Shop</button>
+    <button class="mob-nav-item" onclick="openSearch()"><i class="bi bi-search"></i>Search</button>
+    <button class="mob-nav-item" onclick="toggleWishPanel()"><i class="bi bi-heart"></i>Wishlist<span class="mob-badge" id="mobWishBadge" style="display:none">0</span></button>
+    <button class="mob-nav-item" onclick="toggleCart()"><i class="bi bi-bag"></i>Cart<span class="mob-badge" id="mobCartBadge" style="display:none">0</span></button>
+  </div>
+</div>
+
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 /* ═══ PRODUCT DATA ═══ */
 const products = [
-  {id:0,name:'Daily Face Wash',tag:'Face Care',sub:'200ml · All Skin Types',img:'https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=100&q=80',stars:'★★★★★',rating:'4.9 (428 Reviews)',price:38,oldPrice:48,cat:'face',desc:'FORGE Daily Face Wash — a premium cleanse engineered for male skin. Activated Charcoal with Salicylic Acid 2% absorbs excess oil, flushes impurities, and unblocks pores.',benefits:['Activated Charcoal absorbs excess oil','Salicylic Acid 2% penetrates pores','pH Balanced formula for male skin','Dermatologist-tested'],ingredients:'Aqua, Sodium Lauroyl Sarcosinate, Activated Charcoal, Salicylic Acid 2%, Glycerin, Panthenol, Aloe Vera, Niacinamide',howto:['Wet face with warm water','Massage in circular motions for 60 seconds','Rinse with cool water','Use morning and evening'],specs:[{label:'Volume',value:'200ml'},{label:'Type',value:'All Skin Types'},{label:'Made In',value:'USA'}],variants:{label:'Size',opts:['100ml','200ml','400ml']},skinType:'All Skin Types',spf:'N/A',hold:'N/A'},
-  {id:1,name:'Beard & Skin Oil',tag:'Beard Care',sub:'50ml · Moisturizing',img:'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=100&q=80',stars:'★★★★★',rating:'4.9 (215 Reviews)',price:45,oldPrice:null,cat:'beard',desc:'3-in-1 formula that softens your beard, hydrates the skin beneath, and delivers a masculine scent from Argan, Jojoba, and Cedarwood oils.',benefits:['Argan Oil nourishes from root to tip','Jojoba Oil mirrors natural sebum','Cedarwood warm woody scent','Reduces itch within 3–5 days'],ingredients:'Argania Spinosa Oil, Jojoba Seed Oil, Sweet Almond Oil, Cedarwood Oil, Tocopherol (Vitamin E)',howto:['Drop 3–5 drops into palm','Rub hands to warm','Work into beard and skin','Comb to distribute evenly'],specs:[{label:'Volume',value:'50ml'},{label:'Ideal For',value:'All Beard Lengths'},{label:'Made In',value:'USA'}],variants:{label:'Scent',opts:['Cedarwood','Sandalwood','Fresh Mint']},skinType:'All',spf:'N/A',hold:'N/A'},
-  {id:2,name:'SPF Moisturizer',tag:'Face Care',sub:'75ml · SPF30',img:'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=100&q=80',stars:'★★★★☆',rating:'4.3 (93 Reviews)',price:52,oldPrice:68,cat:'face',desc:'Lightweight moisturizer, SPF30 sun protection, and anti-aging action in one step. Hyaluronic Acid draws in moisture, Vitamin C brightens.',benefits:['Broad Spectrum SPF30','Hyaluronic Acid 72hr hydration','Vitamin C 15% brightens','Zero white cast'],ingredients:'Aqua, Homosalate, Zinc Oxide 4%, Sodium Hyaluronate, Ascorbic Acid 15%, Niacinamide',howto:['Cleanse face','Apply pea-sized amount','Blend across face and neck','Use every morning'],specs:[{label:'Volume',value:'75ml'},{label:'SPF',value:'SPF 30'},{label:'Vitamin C',value:'15%'}],variants:{label:'Finish',opts:['Matte','Natural Glow']},skinType:'All / Oily',spf:'SPF30',hold:'N/A'},
-  {id:3,name:'Power Serum',tag:'Anti-Fatigue',sub:'30ml · Caffeine Complex',img:'https://images.unsplash.com/photo-1542327897-d73f4005b533?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1542327897-d73f4005b533?w=100&q=80',stars:'★★★★★',rating:'4.9 (387 Reviews)',price:62,oldPrice:null,cat:'body',desc:'5% Caffeine Complex stimulates circulation to reduce puffiness and dark circles. Niacinamide 10% evens skin tone.',benefits:['Caffeine 5% reduces puffiness','Niacinamide 10% evens tone','Retinol 0.3% boosts collagen','Visible results in 4 weeks'],ingredients:'Aqua, Niacinamide 10%, Caffeine 5%, Sodium Hyaluronate, Retinol 0.3%, Peptide Complex',howto:['Start with clean face','2–3 drops into palm','Pat gently across face','Follow with moisturizer'],specs:[{label:'Volume',value:'30ml'},{label:'Niacinamide',value:'10%'},{label:'Caffeine',value:'5%'}],variants:{label:'Strength',opts:['Regular','Intensive']},skinType:'All',spf:'N/A',hold:'N/A'},
-  {id:4,name:'Precision Shave Cream',tag:'Beard Care',sub:'150ml · Sensitive Skin',img:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=100&q=80',stars:'★★★★★',rating:'4.8 (156 Reviews)',price:42,oldPrice:null,cat:'beard',desc:'Rich lubricating formula for maximum protection between blade and skin. Aloe Vera, Chamomile, and Vitamin E soothe simultaneously.',benefits:['High lubrication for blade glide','Aloe Vera eliminates burning','Chamomile reduces redness','Safe for sensitive skin'],ingredients:'Aqua, Stearic Acid, Glycerin, Aloe Vera, Chamomile Extract, Vitamin E, Menthol',howto:['Wet face','Apply to beard','Work into lather','Shave with grain first'],specs:[{label:'Volume',value:'150ml'},{label:'Skin',value:'Sensitive'}],variants:{label:'Scent',opts:['Classic','Unscented','Menthol Blast']},skinType:'Sensitive',spf:'N/A',hold:'N/A'},
-  {id:5,name:'Performance Body Wash',tag:'Body',sub:'300ml · Energizing',img:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&q=80',stars:'★★★★★',rating:'4.9 (312 Reviews)',price:34,oldPrice:42,cat:'body',desc:'Menthol and Eucalyptus for pro-grade cooling. Shea Butter and Coconut Oil condition skin after every shower.',benefits:['Menthol 3% cooling','Shea Butter conditions','Tea Tree antibacterial','Cool Citrus scent'],ingredients:'Aqua, Sodium Lauryl Sulfoacetate, Glycerin, Shea Butter, Coconut Oil, Menthol 3%, Eucalyptus Oil',howto:['Wet body','Lather and cleanse','Leave 30 seconds','Rinse thoroughly'],specs:[{label:'Volume',value:'300ml'},{label:'Menthol',value:'3%'}],variants:{label:'Size',opts:['150ml','300ml','500ml']},skinType:'All',spf:'N/A',hold:'N/A'},
-  {id:6,name:'Dark Circle Eye Cream',tag:'Face Care',sub:'15ml · Revitalizing',img:'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=100&q=80',stars:'★★★★★',rating:'4.8 (189 Reviews)',price:58,oldPrice:null,cat:'face',desc:'Retinol 0.5%, Peptide Complex, and Vitamin K restore the delicate eye area. Brighter and younger in 2 weeks.',benefits:['Retinol 0.5% reduces crow\'s feet','Vitamin K2 reduces dark circles','Caffeine 3% reduces puffiness','Ophthalmologist-tested'],ingredients:'Aqua, Glycerin, Caffeine 3%, Retinol 0.5%, Vitamin K2, Sodium Hyaluronate, Argireline',howto:['Cleanse face','Pat around eye area','Focus under-eye','Morning and evening'],specs:[{label:'Volume',value:'15ml'},{label:'Retinol',value:'0.5%'},{label:'Tested By',value:'Ophthalmologist'}],variants:{label:'Strength',opts:['Regular (0.3%)','Advanced (0.5%)']},skinType:'All',spf:'N/A',hold:'N/A'},
-  {id:7,name:'Beard Styling Balm',tag:'Beard Care',sub:'60g · Medium Hold',img:'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=100&q=80',stars:'★★★★★',rating:'4.9 (241 Reviews)',price:36,oldPrice:44,cat:'beard',desc:'Medium hold for a disciplined beard all day. Beeswax and Shea Butter with Cedarwood and Sandalwood.',benefits:['Beeswax medium hold 8–12hr','Shea Butter conditions','Cedarwood + Sandalwood scent','No flakes or residue'],ingredients:'Beeswax, Shea Butter, Argan Oil, Jojoba Oil, Cedarwood Oil, Sandalwood Oil, Vitamin E',howto:['Scoop thumbnail-sized amount','Warm between palms','Work through beard','Shape with comb'],specs:[{label:'Volume',value:'60g'},{label:'Hold Level',value:'Medium (3/5)'},{label:'Scent',value:'Woody'}],variants:{label:'Hold',opts:['Light (1/5)','Medium (3/5)','Strong (5/5)']},skinType:'All',spf:'N/A',hold:'Medium'}
+  {id:0,name:'Daily Face Wash',tag:'Face Care',sub:'200ml · All Skin Types',img:'https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?w=100&q=80',stars:'★★★★★',rating:'4.9 (428 Reviews)',price:38,oldPrice:48,cat:'face',desc:'FORGE Daily Face Wash — a premium cleanse engineered for male skin. Activated Charcoal with Salicylic Acid 2% absorbs excess oil, flushes impurities, and unblocks pores.',benefits:['Activated Charcoal absorbs excess oil','Salicylic Acid 2% penetrates pores','pH Balanced formula for male skin','Dermatologist-tested'],ingredients:'Aqua, Sodium Lauroyl Sarcosinate, Activated Charcoal, Salicylic Acid 2%, Glycerin, Panthenol, Aloe Vera, Niacinamide',howto:['Wet face with warm water','Massage in circular motions for 60 seconds','Rinse with cool water','Use morning and evening'],specs:[{label:'Volume',value:'200ml'},{label:'Type',value:'All Skin Types'},{label:'Made In',value:'USA'}],variants:{label:'Size',opts:['100ml','200ml','400ml']},variantDetails:{'100ml':{sub:'100ml · All Skin Types',price:28,oldPrice:38},'200ml':{sub:'200ml · All Skin Types',price:38,oldPrice:48},'400ml':{sub:'400ml · All Skin Types',price:58,oldPrice:68}},skinType:'All Skin Types',spf:'N/A',hold:'N/A'},
+  {id:1,name:'Beard & Skin Oil',tag:'Beard Care',sub:'50ml · Moisturizing',img:'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=100&q=80',stars:'★★★★★',rating:'4.9 (215 Reviews)',price:45,oldPrice:null,cat:'beard',desc:'3-in-1 formula that softens your beard, hydrates the skin beneath, and delivers a masculine scent from Argan, Jojoba, and Cedarwood oils.',benefits:['Argan Oil nourishes from root to tip','Jojoba Oil mirrors natural sebum','Cedarwood warm woody scent','Reduces itch within 3–5 days'],ingredients:'Argania Spinosa Oil, Jojoba Seed Oil, Sweet Almond Oil, Cedarwood Oil, Tocopherol (Vitamin E)',howto:['Drop 3–5 drops into palm','Rub hands to warm','Work into beard and skin','Comb to distribute evenly'],specs:[{label:'Volume',value:'50ml'},{label:'Ideal For',value:'All Beard Lengths'},{label:'Made In',value:'USA'}],variants:{label:'Scent',opts:['Cedarwood','Sandalwood','Fresh Mint']},variantDetails:{'Cedarwood':{sub:'50ml · Cedarwood'},'Sandalwood':{sub:'50ml · Sandalwood'},'Fresh Mint':{sub:'50ml · Fresh Mint'}},skinType:'All',spf:'N/A',hold:'N/A'},
+  {id:2,name:'SPF Moisturizer',tag:'Face Care',sub:'75ml · SPF30',img:'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=100&q=80',stars:'★★★★☆',rating:'4.3 (93 Reviews)',price:52,oldPrice:68,cat:'face',desc:'Lightweight moisturizer, SPF30 sun protection, and anti-aging action in one step. Hyaluronic Acid draws in moisture, Vitamin C brightens.',benefits:['Broad Spectrum SPF30','Hyaluronic Acid 72hr hydration','Vitamin C 15% brightens','Zero white cast'],ingredients:'Aqua, Homosalate, Zinc Oxide 4%, Sodium Hyaluronate, Ascorbic Acid 15%, Niacinamide',howto:['Cleanse face','Apply pea-sized amount','Blend across face and neck','Use every morning'],specs:[{label:'Volume',value:'75ml'},{label:'SPF',value:'SPF 30'},{label:'Vitamin C',value:'15%'}],variants:{label:'Finish',opts:['Matte','Natural Glow']},variantDetails:{'Matte':{sub:'75ml · SPF30 · Matte'},'Natural Glow':{sub:'75ml · SPF30 · Natural Glow'}},skinType:'All / Oily',spf:'SPF30',hold:'N/A'},
+  {id:3,name:'Power Serum',tag:'Anti-Fatigue',sub:'30ml · Caffeine Complex',img:'https://images.unsplash.com/photo-1542327897-d73f4005b533?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1542327897-d73f4005b533?w=100&q=80',stars:'★★★★★',rating:'4.9 (387 Reviews)',price:62,oldPrice:null,cat:'body',desc:'5% Caffeine Complex stimulates circulation to reduce puffiness and dark circles. Niacinamide 10% evens skin tone.',benefits:['Caffeine 5% reduces puffiness','Niacinamide 10% evens tone','Retinol 0.3% boosts collagen','Visible results in 4 weeks'],ingredients:'Aqua, Niacinamide 10%, Caffeine 5%, Sodium Hyaluronate, Retinol 0.3%, Peptide Complex',howto:['Start with clean face','2–3 drops into palm','Pat gently across face','Follow with moisturizer'],specs:[{label:'Volume',value:'30ml'},{label:'Niacinamide',value:'10%'},{label:'Caffeine',value:'5%'}],variants:{label:'Strength',opts:['Regular','Intensive']},variantDetails:{'Regular':{sub:'30ml · Regular Strength',price:62},'Intensive':{sub:'30ml · Intensive Strength',price:78}},skinType:'All',spf:'N/A',hold:'N/A'},
+  {id:4,name:'Precision Shave Cream',tag:'Beard Care',sub:'150ml · Sensitive Skin',img:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=100&q=80',stars:'★★★★★',rating:'4.8 (156 Reviews)',price:42,oldPrice:null,cat:'beard',desc:'Rich lubricating formula for maximum protection between blade and skin. Aloe Vera, Chamomile, and Vitamin E soothe simultaneously.',benefits:['High lubrication for blade glide','Aloe Vera eliminates burning','Chamomile reduces redness','Safe for sensitive skin'],ingredients:'Aqua, Stearic Acid, Glycerin, Aloe Vera, Chamomile Extract, Vitamin E, Menthol',howto:['Wet face','Apply to beard','Work into lather','Shave with grain first'],specs:[{label:'Volume',value:'150ml'},{label:'Skin',value:'Sensitive'}],variants:{label:'Scent',opts:['Classic','Unscented','Menthol Blast']},variantDetails:{'Classic':{sub:'150ml · Classic'},'Unscented':{sub:'150ml · Unscented'},'Menthol Blast':{sub:'150ml · Menthol Blast'}},skinType:'Sensitive',spf:'N/A',hold:'N/A'},
+  {id:5,name:'Performance Body Wash',tag:'Body',sub:'300ml · Energizing',img:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&q=80',stars:'★★★★★',rating:'4.9 (312 Reviews)',price:34,oldPrice:42,cat:'body',desc:'Menthol and Eucalyptus for pro-grade cooling. Shea Butter and Coconut Oil condition skin after every shower.',benefits:['Menthol 3% cooling','Shea Butter conditions','Tea Tree antibacterial','Cool Citrus scent'],ingredients:'Aqua, Sodium Lauryl Sulfoacetate, Glycerin, Shea Butter, Coconut Oil, Menthol 3%, Eucalyptus Oil',howto:['Wet body','Lather and cleanse','Leave 30 seconds','Rinse thoroughly'],specs:[{label:'Volume',value:'300ml'},{label:'Menthol',value:'3%'}],variants:{label:'Size',opts:['150ml','300ml','500ml']},variantDetails:{'150ml':{sub:'150ml · Energizing',price:24,oldPrice:30},'300ml':{sub:'300ml · Energizing',price:34,oldPrice:42},'500ml':{sub:'500ml · Energizing',price:48,oldPrice:58}},skinType:'All',spf:'N/A',hold:'N/A'},
+  {id:6,name:'Dark Circle Eye Cream',tag:'Face Care',sub:'15ml · Revitalizing',img:'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=100&q=80',stars:'★★★★★',rating:'4.8 (189 Reviews)',price:58,oldPrice:null,cat:'face',desc:'Retinol 0.5%, Peptide Complex, and Vitamin K restore the delicate eye area. Brighter and younger in 2 weeks.',benefits:['Retinol 0.5% reduces crow\'s feet','Vitamin K2 reduces dark circles','Caffeine 3% reduces puffiness','Ophthalmologist-tested'],ingredients:'Aqua, Glycerin, Caffeine 3%, Retinol 0.5%, Vitamin K2, Sodium Hyaluronate, Argireline',howto:['Cleanse face','Pat around eye area','Focus under-eye','Morning and evening'],specs:[{label:'Volume',value:'15ml'},{label:'Retinol',value:'0.5%'},{label:'Tested By',value:'Ophthalmologist'}],variants:{label:'Strength',opts:['Regular (0.3%)','Advanced (0.5%)']},variantDetails:{'Regular (0.3%)':{sub:'15ml · Regular 0.3%',price:48},'Advanced (0.5%)':{sub:'15ml · Advanced 0.5%',price:58}},skinType:'All',spf:'N/A',hold:'N/A'},
+  {id:7,name:'Beard Styling Balm',tag:'Beard Care',sub:'60g · Medium Hold',img:'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=100&q=80',stars:'★★★★★',rating:'4.9 (241 Reviews)',price:36,oldPrice:44,cat:'beard',desc:'Medium hold for a disciplined beard all day. Beeswax and Shea Butter with Cedarwood and Sandalwood.',benefits:['Beeswax medium hold 8–12hr','Shea Butter conditions','Cedarwood + Sandalwood scent','No flakes or residue'],ingredients:'Beeswax, Shea Butter, Argan Oil, Jojoba Oil, Cedarwood Oil, Sandalwood Oil, Vitamin E',howto:['Scoop thumbnail-sized amount','Warm between palms','Work through beard','Shape with comb'],specs:[{label:'Volume',value:'60g'},{label:'Hold Level',value:'Medium (3/5)'},{label:'Scent',value:'Woody'}],variants:{label:'Hold',opts:['Light (1/5)','Medium (3/5)','Strong (5/5)']},variantDetails:{'Light (1/5)':{sub:'60g · Light Hold',price:32,oldPrice:40},'Medium (3/5)':{sub:'60g · Medium Hold',price:36,oldPrice:44},'Strong (5/5)':{sub:'60g · Strong Hold',price:40,oldPrice:48}},skinType:'All',spf:'N/A',hold:'Medium'},
+  {id:8,name:'Peptide Anti-Aging Complex',tag:'Research',sub:'30ml · Clinical Grade',img:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=100&q=80',stars:'★★★★★',rating:'4.9 (342 Reviews)',price:89,oldPrice:110,cat:'research',desc:'Clinically-proven peptide complex developed from 5 years of dermatological research. Matrixyl 3000 and Argireline stimulate collagen production and reduce fine lines by up to 45% in 8 weeks.',benefits:['Matrixyl 3000 boosts collagen by 350%','Argireline relaxes expression lines','Clinically proven in peer-reviewed studies','Published in Journal of Dermatological Science'],ingredients:'Aqua, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7, Acetyl Hexapeptide-8, Hyaluronic Acid, Squalane, Niacinamide 5%',howto:['Apply to clean dry skin','Use 2–3 drops on face and neck','Pat gently — do not rub','Use morning and evening for best results'],specs:[{label:'Volume',value:'30ml'},{label:'Key Peptide',value:'Matrixyl 3000'},{label:'Clinical Study',value:'8-week double-blind'},{label:'Made In',value:'USA'}],variants:{label:'Strength',opts:['Standard (1x)','Clinical (2x)','Maximum (3x)']},variantDetails:{'Standard (1x)':{sub:'30ml · Standard Peptide 1x',price:89,oldPrice:110},'Clinical (2x)':{sub:'30ml · Clinical Peptide 2x',price:119,oldPrice:145},'Maximum (3x)':{sub:'30ml · Maximum Peptide 3x',price:149,oldPrice:180}},skinType:'All / Mature',spf:'N/A',hold:'N/A'},
+  {id:9,name:'Stem Cell Recovery Serum',tag:'Research',sub:'25ml · Bio-Active',img:'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=100&q=80',stars:'★★★★★',rating:'4.8 (198 Reviews)',price:95,oldPrice:null,cat:'research',desc:'Plant stem cell technology backed by published research from the International Journal of Cosmetic Science. Apple Stem Cell Extract and Argan Stem Cells protect and regenerate skin at the cellular level.',benefits:['Apple Stem Cell protects skin longevity','Argan Stem Cells regenerate tissue','Research-backed PhytoCellTec™ technology','Reduces wrinkle depth by 15% in 4 weeks'],ingredients:'Aqua, Malus Domestica Fruit Cell Culture Extract, Argania Spinosa Callus Culture Extract, Sodium Hyaluronate, Lecithin, Glycerin, Xanthan Gum',howto:['Apply after cleansing','Use 3–4 drops','Spread evenly on face','Follow with moisturizer'],specs:[{label:'Volume',value:'25ml'},{label:'Technology',value:'PhytoCellTec™'},{label:'Research',value:'IJCS Published'},{label:'Made In',value:'Switzerland'}],variants:{label:'Formula',opts:['Original','Intensive Repair']},variantDetails:{'Original':{sub:'25ml · Original Formula',price:95},'Intensive Repair':{sub:'25ml · Intensive Repair',price:125}},skinType:'All / Aging',spf:'N/A',hold:'N/A'},
+  {id:10,name:'Niacinamide Lab Concentrate',tag:'Research',sub:'30ml · 10% Concentration',img:'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=100&q=80',stars:'★★★★☆',rating:'4.7 (264 Reviews)',price:45,oldPrice:55,cat:'research',desc:'Laboratory-grade Niacinamide concentrate validated in a 12-week randomized clinical trial. Reduces pore size, controls sebum, and improves skin barrier function.',benefits:['Niacinamide 10% shrinks pores','Zinc PCA controls oil production','12-week clinical trial proven','Strengthens skin barrier by 28%'],ingredients:'Aqua, Niacinamide 10%, Zinc PCA 1%, Hyaluronic Acid, Panthenol, Allantoin, Glycerin',howto:['Cleanse and tone first','Apply 4–5 drops','Spread across oily areas','Use twice daily'],specs:[{label:'Volume',value:'30ml'},{label:'Niacinamide',value:'10%'},{label:'Clinical Trial',value:'12-week RCT'},{label:'Made In',value:'South Korea'}],variants:{label:'Concentration',opts:['5%','10%','20%']},variantDetails:{'5%':{sub:'30ml · 5% Gentle',price:35,oldPrice:42},'10%':{sub:'30ml · 10% Standard',price:45,oldPrice:55},'20%':{sub:'30ml · 20% Professional',price:62,oldPrice:75}},skinType:'Oily / Combination',spf:'N/A',hold:'N/A'},
+  {id:11,name:'Retinol Clinical Treatment',tag:'Research',sub:'30ml · 0.5% Retinol',img:'https://images.unsplash.com/photo-1570194065650-d99fb4ee38f2?w=900&q=88',thumbImg:'https://images.unsplash.com/photo-1570194065650-d99fb4ee38f2?w=100&q=80',stars:'★★★★★',rating:'4.9 (412 Reviews)',price:72,oldPrice:null,cat:'research',desc:'Encapsulated retinol system developed with university research labs. Time-release technology minimizes irritation while maximizing anti-aging efficacy. Published in the British Journal of Dermatology.',benefits:['Encapsulated Retinol reduces irritation by 70%','Time-release delivers over 8 hours','Clinically reduces wrinkles by 36%','Published in British Journal of Dermatology'],ingredients:'Aqua, Retinol 0.5% (Encapsulated), Squalane, Ceramide NP, Vitamin E, Jojoba Oil, Bisabolol',howto:['Use only at night','Apply pea-sized amount','Avoid eye area','Always use SPF the next morning'],specs:[{label:'Volume',value:'30ml'},{label:'Retinol',value:'0.5% Encapsulated'},{label:'Research',value:'BJD Published'},{label:'Made In',value:'USA'}],variants:{label:'Retinol Level',opts:['0.25% Beginner','0.5% Intermediate','1.0% Advanced']},variantDetails:{'0.25% Beginner':{sub:'30ml · 0.25% Beginner',price:55},'0.5% Intermediate':{sub:'30ml · 0.5% Intermediate',price:72},'1.0% Advanced':{sub:'30ml · 1.0% Advanced',price:95}},skinType:'All (patch test first)',spf:'N/A',hold:'N/A'}
 ];
 
 /* ═══ COUPONS ═══ */
@@ -1148,6 +1439,14 @@ const COUPONS = {
   'SAVE5': {discount:5,type:'fixed',label:'$5 off'},
   'FIRSTORDER': {discount:15,type:'percent',label:'15% off first order'}
 };
+
+/* ═══ BUNDLE DEALS ═══ */
+const BUNDLES = [
+  {id:'face-routine',name:'Face Care Routine',desc:'Complete daily face care — cleanse, protect, and revitalize.',productIds:[0,2,6],discount:15,tag:'Save 15%'},
+  {id:'beard-kit',name:'Ultimate Beard Kit',desc:'Everything you need for a well-groomed beard.',productIds:[1,4,7],discount:12,tag:'Save 12%'},
+  {id:'anti-aging-set',name:'Anti-Aging Research Set',desc:'Clinically-proven research formulas for younger-looking skin.',productIds:[8,9,11],discount:18,tag:'Save 18%'},
+  {id:'daily-essentials',name:'Daily Essentials Pack',desc:'Face wash, body wash, and serum — your daily trio.',productIds:[0,5,3],discount:10,tag:'Save 10%'}
+];
 
 /* ═══ STATE ═══ */
 let currentPMProduct = null;
@@ -1162,6 +1461,32 @@ let loyaltyPoints = 0;
 let appliedCoupon = null;
 let isAnnual = false;
 let currentPMVariant = {};
+let orderHistory = [];
+let productReviews = {};
+
+/* ═══ STORAGE ═══ */
+function saveToStorage(){
+  try{
+    localStorage.setItem('forge_cart',JSON.stringify(cartItems));
+    localStorage.setItem('forge_wishlist',JSON.stringify(wishlist));
+    localStorage.setItem('forge_points',JSON.stringify(loyaltyPoints));
+    localStorage.setItem('forge_pointsHistory',JSON.stringify(pointsHistory));
+    localStorage.setItem('forge_orders',JSON.stringify(orderHistory));
+    localStorage.setItem('forge_reviews',JSON.stringify(productReviews));
+    localStorage.setItem('forge_recentlyViewed',JSON.stringify(recentlyViewed));
+  }catch(e){}
+}
+function loadFromStorage(){
+  try{
+    const cart=localStorage.getItem('forge_cart');if(cart){const parsed=JSON.parse(cart);if(Array.isArray(parsed))cartItems=parsed;}
+    const wish=localStorage.getItem('forge_wishlist');if(wish){const parsed=JSON.parse(wish);if(Array.isArray(parsed))wishlist=parsed;}
+    const pts=localStorage.getItem('forge_points');if(pts){const parsed=JSON.parse(pts);if(typeof parsed==='number')loyaltyPoints=parsed;}
+    const ptsH=localStorage.getItem('forge_pointsHistory');if(ptsH){const arr=JSON.parse(ptsH);if(Array.isArray(arr)){pointsHistory.length=0;arr.forEach(x=>pointsHistory.push(x));}}
+    const orders=localStorage.getItem('forge_orders');if(orders){const parsed=JSON.parse(orders);if(Array.isArray(parsed))orderHistory=parsed;}
+    const reviews=localStorage.getItem('forge_reviews');if(reviews){const parsed=JSON.parse(reviews);if(parsed&&typeof parsed==='object')productReviews=parsed;}
+    const rv=localStorage.getItem('forge_recentlyViewed');if(rv){const parsed=JSON.parse(rv);if(Array.isArray(parsed))recentlyViewed=parsed;}
+  }catch(e){}
+}
 
 /* ═══ SCROLL / NAV ═══ */
 window.addEventListener('scroll',()=>{
@@ -1178,6 +1503,7 @@ window.addEventListener('scroll',()=>{
 /* ═══ SCROLL REVEAL ═══ */
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.1});
 document.querySelectorAll('.rev,.rev-l,.rev-r,.stg').forEach(el=>io.observe(el));
+setTimeout(()=>{document.querySelectorAll('.stg').forEach(el=>{if(!el.classList.contains('vis'))el.classList.add('vis');});},1200);/* fallback if IntersectionObserver misses */
 
 /* ═══ RIPPLE ═══ */
 document.addEventListener('click',e=>{
@@ -1213,6 +1539,7 @@ document.querySelectorAll('.prod-tab').forEach(tab=>{
 function openPM(idx){
   const p=products[idx];
   currentPMProduct=p;
+  currentPMProduct._activePrice=p.price;
   currentPMVariant={};
   addRecentlyViewed(p);
 
@@ -1256,6 +1583,12 @@ function openPM(idx){
   document.getElementById('stickyPrice').textContent='$'+p.price;
   document.getElementById('stickyBtn').dataset.pid=p.id;
 
+  // Reset and render review form
+  document.querySelectorAll('.review-stars-input button').forEach(b=>b.classList.remove('active'));
+  const rsi=document.querySelector('.review-stars-input');if(rsi)rsi.dataset.rating='0';
+  const rt=document.getElementById('reviewText');if(rt)rt.value='';
+  renderUserReviews(p.id);
+
   document.getElementById('pmOverlay').classList.add('open');document.getElementById('pmOverlay').style.display='block';
   document.getElementById('prodModal').classList.add('open');document.getElementById('prodModal').style.display='block';
   document.body.style.overflow='hidden';
@@ -1271,7 +1604,8 @@ function pmQty(d){const inp=document.getElementById('pm-qty');inp.value=Math.max
 function pmAddCart(){
   if(!currentPMProduct)return;
   const qty=+document.getElementById('pm-qty').value;
-  for(let i=0;i<qty;i++)addToCart(currentPMProduct.name,currentPMProduct.price,currentPMProduct.thumbImg);
+  const price=currentPMProduct._activePrice||currentPMProduct.price;
+  for(let i=0;i<qty;i++)addToCart(currentPMProduct.name,price,currentPMProduct.thumbImg);
   showToast(currentPMProduct.name+(qty>1?' ×'+qty:'')+' added to cart!');
   const btn=document.getElementById('pm-add-btn');
   btn.innerHTML='<i class="bi bi-check-lg me-2"></i>Added!';btn.style.background='var(--green)';
@@ -1280,8 +1614,9 @@ function pmAddCart(){
 function pmBuyNow(){
   if(!currentPMProduct)return;
   const qty=+document.getElementById('pm-qty').value;
-  pendingPayItems=[{name:currentPMProduct.name,price:currentPMProduct.price,qty}];
-  pendingPayTotal=currentPMProduct.price*qty;
+  const price=currentPMProduct._activePrice||currentPMProduct.price;
+  pendingPayItems=[{name:currentPMProduct.name,price:price,qty}];
+  pendingPayTotal=price*qty;
   pendingPayDiscount=0;
   closePM();setTimeout(()=>openPay(),350);
 }
@@ -1297,6 +1632,19 @@ function selectVariant(el,label,val){
   document.querySelectorAll('.variant-opt').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   currentPMVariant[label]=val;
+  if(currentPMProduct&&currentPMProduct.variantDetails&&currentPMProduct.variantDetails[val]){
+    const vd=currentPMProduct.variantDetails[val];
+    if(vd.sub) document.getElementById('pm-sub').textContent=vd.sub;
+    if(typeof vd.price==='number'){
+      currentPMProduct._activePrice=vd.price;
+      document.getElementById('pm-price').textContent='$'+vd.price;
+      document.getElementById('stickyPrice').textContent='$'+vd.price;
+      const oldEl=document.getElementById('pm-old-price'),discEl=document.getElementById('pm-discount');
+      if(vd.oldPrice){oldEl.textContent='$'+vd.oldPrice;discEl.textContent='-'+Math.round((1-vd.price/vd.oldPrice)*100)+'%';discEl.style.display='inline-block';}
+      else{oldEl.textContent='';discEl.style.display='none';}
+    }
+    if(vd.img) document.getElementById('pm-img').src=vd.img;
+  }
 }
 
 /* ═══ STICKY ATC ═══ */
@@ -1317,6 +1665,7 @@ function addRecentlyViewed(p){
   recentlyViewed.unshift({id:p.id,name:p.name,price:p.price,img:p.thumbImg});
   if(recentlyViewed.length>8)recentlyViewed.pop();
   renderRecentlyViewed();
+  saveToStorage();
 }
 function renderRecentlyViewed(){
   const sec=document.getElementById('rvSection');
@@ -1395,6 +1744,39 @@ function openCompareModal(){
 function closeCompareModal(){document.getElementById('compareModalOverlay').classList.remove('open');}
 document.getElementById('compareModalOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeCompareModal();});
 
+/* ═══ BUNDLE DEALS ═══ */
+function renderBundles(){
+  const grid=document.getElementById('bundleGrid');
+  if(!grid)return;
+  grid.innerHTML=BUNDLES.map(b=>{
+    const bProducts=b.productIds.map(id=>products.find(p=>p.id===id)).filter(Boolean);
+    const originalTotal=bProducts.reduce((s,p)=>s+p.price,0);
+    const bundlePrice=Math.round(originalTotal*(1-b.discount/100)*100)/100;
+    const savings=(originalTotal-bundlePrice).toFixed(2);
+    return `<div class="col-sm-6 col-lg-3"><div class="bundle-card">
+      <span class="bundle-tag">${b.tag}</span>
+      <div class="bundle-name">${b.name}</div>
+      <div class="bundle-desc">${b.desc}</div>
+      <div class="bundle-products">${bProducts.map(p=>`<div class="bundle-product"><img src="${p.thumbImg}" alt="${p.name}"/><div class="bundle-product-info"><div class="bundle-product-name">${p.name}</div><div class="bundle-product-price">$${p.price}</div></div></div>`).join('')}</div>
+      <div class="bundle-pricing"><div class="bundle-original">$${originalTotal.toFixed(2)}</div><div class="bundle-final">$${bundlePrice.toFixed(2)}</div><div class="bundle-savings"><i class="bi bi-tag-fill me-1"></i>You save $${savings}</div></div>
+      <button class="btn-bundle ripple-wrap" onclick="addBundleToCart('${b.id}')"><i class="bi bi-cart-plus me-1"></i>Add Bundle to Cart</button>
+    </div></div>`;
+  }).join('');
+}
+function addBundleToCart(bundleId){
+  const bundle=BUNDLES.find(b=>b.id===bundleId);
+  if(!bundle)return;
+  const bProducts=bundle.productIds.map(id=>products.find(p=>p.id===id)).filter(Boolean);
+  const originalTotal=bProducts.reduce((s,p)=>s+p.price,0);
+  const bundlePrice=Math.round(originalTotal*(1-bundle.discount/100)*100)/100;
+  const perItemRatio=bundlePrice/originalTotal;
+  bProducts.forEach(p=>{
+    const discountedPrice=Math.round(p.price*perItemRatio*100)/100;
+    addToCart(p.name,discountedPrice,p.thumbImg);
+  });
+  showToast(bundle.name+' added to cart! 🎉');
+}
+
 /* ═══ COUPON ═══ */
 function renderCouponHints(){
   const list=document.getElementById('couponList');
@@ -1431,6 +1813,7 @@ function addPoints(amount){
   const pts=Math.floor(amount);
   loyaltyPoints+=pts;
   updatePointsNav();
+  saveToStorage();
   return pts;
 }
 function updatePointsNav(){
@@ -1477,6 +1860,7 @@ function redeemPoints(cost,reward,pts){
   updatePointsNav();
   renderPointsPanel();
   showToast(`🎁 ${reward} redeemed!`);
+  saveToStorage();
 }
 
 /* ═══ WISHLIST ═══ */
@@ -1485,6 +1869,7 @@ function toggleWish(btn,name,price,img){
   if(exists>-1){wishlist.splice(exists,1);btn.classList.remove('active');btn.innerHTML='<i class="bi bi-heart"></i>';showToast('Removed from wishlist');}
   else{wishlist.push({name,price,img});btn.classList.add('active');btn.innerHTML='<i class="bi bi-heart-fill"></i>';showToast(name+' added to wishlist ♥');}
   updateWishlistUI();syncWishBtns();
+  saveToStorage();
 }
 function syncWishBtns(){
   document.querySelectorAll('.wish-btn').forEach(btn=>{
@@ -1499,12 +1884,14 @@ function updateWishlistUI(){
   const cnt=document.getElementById('wishCount');
   cnt.textContent=wishlist.length;cnt.style.display=wishlist.length>0?'flex':'none';
   document.getElementById('wlCount').textContent=wishlist.length;
+  const mobWishBadge=document.getElementById('mobWishBadge');
+  if(mobWishBadge){mobWishBadge.textContent=wishlist.length;mobWishBadge.style.display=wishlist.length>0?'flex':'none';}
   const body=document.getElementById('wlBody');
   if(wishlist.length===0){body.innerHTML='<div class="cd-empty"><i class="bi bi-heart"></i>Your wishlist is empty</div>';return;}
   body.innerHTML=wishlist.map((item,i)=>`<div class="cd-item"><img src="${item.img}" alt="${item.name}"/><div style="flex:1"><div class="cd-item-name">${item.name}</div><div class="cd-item-price">$${item.price}</div><button onclick="moveWishToCart(${i})" style="background:var(--accent);color:#fff;border:none;border-radius:3px;padding:.25rem .7rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;margin-top:.3rem;">Move to Cart</button></div><button onclick="removeWish(${i})" class="cd-remove"><i class="bi bi-x-lg"></i></button></div>`).join('');
 }
-function moveWishToCart(i){const item=wishlist[i];addToCart(item.name,item.price,item.img);showToast(item.name+' moved to cart!');}
-function removeWish(i){wishlist.splice(i,1);updateWishlistUI();syncWishBtns();}
+function moveWishToCart(i){const item=wishlist[i];addToCart(item.name,item.price,item.img);showToast(item.name+' moved to cart!');saveToStorage();}
+function removeWish(i){wishlist.splice(i,1);updateWishlistUI();syncWishBtns();saveToStorage();}
 function toggleWishPanel(){
   const panel=document.getElementById('wishPanel'),overlay=document.getElementById('wlOverlay');
   const isOpen=panel.classList.contains('open');
@@ -1518,6 +1905,7 @@ function addToCart(name,price,img){
   const exist=cartItems.find(i=>i.name===name);
   if(exist)exist.qty++;else cartItems.push({name,price,img,qty:1});
   updateCartUI();
+  saveToStorage();
 }
 function addCartFromBtn(btn,name,price,img){
   addToCart(name,price,img);showToast(name+' added to cart!');
@@ -1548,9 +1936,28 @@ function updateCartUI(){
   document.getElementById('lpSubText').textContent=`Earn ${pts} Forge Points for this order`;
   lpBanner.style.display='flex';
   body.innerHTML=cartItems.map((item,i)=>`<div class="cd-item"><img src="${item.img}" alt="${item.name}"/><div style="flex:1;min-width:0;"><div class="cd-item-name">${item.name}</div><div class="cd-item-price">$${(item.price*item.qty).toFixed(2)}</div><div class="cd-qty"><button onclick="changeQty(${i},-1)">−</button><span>${item.qty}</span><button onclick="changeQty(${i},1)">+</button></div></div><button class="cd-remove" onclick="removeItem(${i})"><i class="bi bi-x-lg"></i></button></div>`).join('');
+  // Free shipping bar
+  const FREE_SHIP=75;
+  const shippingBar=document.getElementById('shippingBar');
+  if(shippingBar){
+    const sbText=document.getElementById('sbText');
+    const sbFill=document.getElementById('sbFill');
+    const pct=Math.min(100,rawTotal/FREE_SHIP*100);
+    sbFill.style.width=pct+'%';
+    if(rawTotal>=FREE_SHIP){
+      shippingBar.classList.add('reached');
+      sbText.innerHTML='<i class="bi bi-check-circle-fill me-1"></i>You\'ve unlocked FREE shipping!';
+    }else{
+      shippingBar.classList.remove('reached');
+      sbText.textContent='Add $'+(FREE_SHIP-rawTotal).toFixed(2)+' more for FREE shipping!';
+    }
+  }
+  // Mobile cart badge
+  const mobCartBadge=document.getElementById('mobCartBadge');
+  if(mobCartBadge){mobCartBadge.textContent=total;mobCartBadge.style.display=total>0?'flex':'none';}
 }
-function changeQty(i,d){cartItems[i].qty=Math.max(1,cartItems[i].qty+d);updateCartUI();}
-function removeItem(i){const name=cartItems[i].name;cartItems.splice(i,1);updateCartUI();showToast(name+' removed');}
+function changeQty(i,d){cartItems[i].qty=Math.max(1,cartItems[i].qty+d);updateCartUI();saveToStorage();}
+function removeItem(i){const name=cartItems[i].name;cartItems.splice(i,1);updateCartUI();showToast(name+' removed');saveToStorage();}
 function toggleCart(){
   const drawer=document.getElementById('cartDrawer'),overlay=document.getElementById('cartOverlay');
   const isOpen=drawer.classList.contains('open');
@@ -1620,6 +2027,10 @@ function processPayment(){
     document.getElementById('paySuccessView').style.display='block';
     document.getElementById('paySuccessView').classList.add('show');
     cartItems=[];appliedCoupon=null;updateCartUI();showToast('Order confirmed! 🎉');
+    orderHistory.push({orderNum,date:new Date().toLocaleDateString(),items:pendingPayItems.map(i=>({name:i.name,qty:i.qty})),total:pendingPayTotal,status:'Confirmed'});
+    const navOrd=document.getElementById('navOrders');
+    if(navOrd){navOrd.textContent=orderHistory.length;navOrd.style.display='block';}
+    saveToStorage();
   },2200);
 }
 
@@ -1780,13 +2191,47 @@ function selectPlan(name,price){
   pendingPayTotal=price;pendingPayDiscount=0;openPay();
 }
 
+/* ═══ ALL PRODUCTS DRAWER ═══ */
+let apdFilter='all';let apdSort='default';
+function openAllProducts(){
+  apdFilter='all';apdSort='default';
+  document.querySelectorAll('.apd-filter').forEach(b=>b.classList.toggle('active',b.dataset.apf==='all'));
+  document.querySelector('.apd-sort').value='default';
+  renderAPD();
+  document.getElementById('allProductsDrawer').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeAllProducts(){
+  document.getElementById('allProductsDrawer').classList.remove('open');document.body.style.overflow='';
+}
+function filterAPD(el,filter){
+  apdFilter=filter;
+  document.querySelectorAll('.apd-filter').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderAPD();
+}
+function sortAPD(value){
+  apdSort=value;renderAPD();
+}
+function renderAPD(){
+  let list=apdFilter==='all'?[...products]:products.filter(p=>p.cat===apdFilter);
+  if(apdSort==='price-asc')list.sort((a,b)=>a.price-b.price);
+  else if(apdSort==='price-desc')list.sort((a,b)=>b.price-a.price);
+  else if(apdSort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
+  document.getElementById('apdCount').textContent='Showing '+list.length+' product'+(list.length!==1?'s':'');
+  document.getElementById('apdGrid').innerHTML=list.map(p=>`<div class="col-sm-6 col-md-4 col-lg-3"><div class="pc"><div class="pi" onclick="closeAllProducts();setTimeout(()=>openPM(${p.id}),350)"><img src="${p.img}" alt="${p.name}" loading="lazy"/><div class="pi-ov"></div>${p.oldPrice?'<span class="ptag sale">Sale</span>':''}<button class="qv" onclick="event.stopPropagation();closeAllProducts();setTimeout(()=>openPM(${p.id}),350)"><i class="bi bi-eye me-1"></i>Quick View</button></div><div class="pb"><div class="stars">${p.stars} <span style="color:rgba(255,255,255,.28);font-size:.65rem">${p.rating.match(/\(.*\)/)?.[0]||''}</span></div><div class="pname" style="cursor:pointer" onclick="closeAllProducts();setTimeout(()=>openPM(${p.id}),350)">${p.name}</div><div class="psub">${p.sub}</div><div><span class="pprice">$${p.price}</span>${p.oldPrice?'<span class="pold">$'+p.oldPrice+'</span>':''}</div><button class="btn-cart ripple-wrap" onclick="addCartFromBtn(this,\'${p.name}\',${p.price},\'${p.thumbImg}\')"><i class="bi bi-cart-plus me-1"></i>Add to Cart</button></div></div></div>`).join('');
+}
+
 /* ═══ LIGHTBOX ═══ */
+let lbImages=[];let lbIdx=0;
 function openLB(src,cap=''){
+  lbImages=products.map(p=>({src:p.img,cap:p.name}));
+  lbIdx=lbImages.findIndex(i=>i.src===src);if(lbIdx<0)lbIdx=0;
   document.getElementById('lb-img').src=src;document.getElementById('lb-caption').textContent=cap;
   document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';
 }
 function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
-function lbPrev(){}function lbNext(){}
+function lbPrev(){if(lbImages.length<2)return;lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;document.getElementById('lb-img').src=lbImages[lbIdx].src;document.getElementById('lb-caption').textContent=lbImages[lbIdx].cap;}
+function lbNext(){if(lbImages.length<2)return;lbIdx=(lbIdx+1)%lbImages.length;document.getElementById('lb-img').src=lbImages[lbIdx].src;document.getElementById('lb-caption').textContent=lbImages[lbIdx].cap;}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLB();});
 
 /* ═══ CONTACT ═══ */
@@ -1809,6 +2254,71 @@ function switchAuth(t){document.getElementById('loginView').style.display=t==='l
 function handleLogin(){const email=document.getElementById('loginEmail').value;const pw=document.getElementById('loginPassword').value;if(!email||!pw){showToast('Please fill all fields');return;}showToast('Welcome back! 👋');addPoints(50);pointsHistory.push({desc:'Login bonus',pts:50,date:new Date().toLocaleDateString()});closeAuth();}
 function handleSignup(){const name=document.getElementById('signupName').value;const email=document.getElementById('signupEmail').value;const pw=document.getElementById('signupPassword').value;if(!name||!email||!pw){showToast('Please fill all fields');return;}showToast('Welcome to FORGE, '+name+'! 🎉');addPoints(100);pointsHistory.push({desc:'Welcome bonus',pts:100,date:new Date().toLocaleDateString()});closeAuth();}
 
+/* ═══ ORDER HISTORY ═══ */
+function toggleOrderHistory(){
+  const panel=document.getElementById('ohPanel'),overlay=document.getElementById('ohOverlay');
+  const isOpen=panel.classList.contains('open');
+  panel.classList.toggle('open',!isOpen);overlay.classList.toggle('open',!isOpen);
+  if(!isOpen){panel.style.pointerEvents='all';overlay.style.pointerEvents='all';renderOrderHistory();}
+  else{setTimeout(()=>{panel.style.pointerEvents='none';overlay.style.pointerEvents='none';},400);}
+}
+function renderOrderHistory(){
+  const body=document.getElementById('ohBody');
+  if(orderHistory.length===0){body.innerHTML='<div class="cd-empty"><i class="bi bi-receipt"></i>No orders yet</div>';return;}
+  body.innerHTML=orderHistory.slice().reverse().map(o=>`
+    <div class="oh-order">
+      <div class="oh-order-header">
+        <span class="oh-order-num">${o.orderNum}</span>
+        <span class="oh-order-status">${o.status}</span>
+      </div>
+      <div class="oh-order-date">${o.date}</div>
+      <div class="oh-order-items">${o.items.map(it=>it.name+(it.qty>1?' ×'+it.qty:'')).join(', ')}</div>
+      <div class="oh-order-total">Total: $${o.total.toFixed(2)}</div>
+    </div>`).join('');
+}
+
+/* ═══ REVIEW FUNCTIONS ═══ */
+function setReviewStar(n){
+  document.querySelectorAll('.review-stars-input button').forEach((btn,i)=>{
+    btn.classList.toggle('active',i<n);
+  });
+  document.querySelector('.review-stars-input').dataset.rating=n;
+}
+
+function submitReview(){
+  if(!currentPMProduct)return;
+  const rating=parseInt(document.querySelector('.review-stars-input')?.dataset.rating||'0');
+  let text=document.getElementById('reviewText')?.value?.trim();
+  if(!rating){showToast('Please select a star rating');return;}
+  if(!text){showToast('Please write a review');return;}
+  text=text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if(!productReviews[currentPMProduct.id])productReviews[currentPMProduct.id]=[];
+  productReviews[currentPMProduct.id].push({rating,text,date:new Date().toLocaleDateString(),user:'You'});
+  document.getElementById('reviewText').value='';
+  document.querySelectorAll('.review-stars-input button').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.review-stars-input').dataset.rating='0';
+  renderUserReviews(currentPMProduct.id);
+  showToast('Thank you for your review! ⭐');
+  saveToStorage();
+}
+
+function renderUserReviews(productId){
+  const container=document.getElementById('userReviews');
+  if(!container)return;
+  const reviews=productReviews[productId]||[];
+  if(reviews.length===0){container.innerHTML='';return;}
+  container.innerHTML=reviews.map(r=>{
+    const safeRating=Math.max(0,Math.min(5,parseInt(r.rating)||0));
+    const safeText=(r.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const safeMeta=((r.user||'')+ ' · '+(r.date||'')).replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return `
+    <div class="user-review">
+      <div class="ur-stars">${'★'.repeat(safeRating)}${'☆'.repeat(5-safeRating)}</div>
+      <div class="ur-text">${safeText}</div>
+      <div class="ur-meta">${safeMeta}</div>
+    </div>`;}).join('');
+}
+
 /* ═══ TOAST ═══ */
 let toastTimer;
 function showToast(msg){
@@ -1822,22 +2332,113 @@ function toggleDark(){document.body.classList.toggle('dark');showToast(document.
 /* ═══ KEYBOARD ═══ */
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
-    closeLB();closeSearch();closePM();closeVideoModal();closeCompareModal();
+    closeLB();closeSearch();closePM();closeVideoModal();closeCompareModal();closeAllProducts();
     if(document.getElementById('cartDrawer').classList.contains('open'))toggleCart();
     if(document.getElementById('wishPanel').classList.contains('open'))toggleWishPanel();
     if(document.getElementById('pointsPanel').classList.contains('open'))togglePointsPanel();
+    if(document.getElementById('ohPanel').classList.contains('open'))toggleOrderHistory();
     if(document.getElementById('payModal').classList.contains('open'))closePay();
   }
+  if(e.key==='ArrowLeft'&&document.getElementById('lb').classList.contains('open'))lbPrev();
+  if(e.key==='ArrowRight'&&document.getElementById('lb').classList.contains('open'))lbNext();
   if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}
 });
 
 /* ═══ INIT ═══ */
 document.addEventListener('DOMContentLoaded',()=>{
+  loadFromStorage();
   renderVideos();
+  renderBundles();
   initVmRows();
   renderCouponHints();
+  renderBundles();
   updateCartUI();
   updateWishlistUI();
+  syncWishBtns();
+  updatePointsNav();
+  renderRecentlyViewed();
+  // Update order history nav badge
+  const navOrd=document.getElementById('navOrders');
+  if(navOrd&&orderHistory.length>0){navOrd.textContent=orderHistory.length;navOrd.style.display='block';}
+  // Image zoom tracking
+  const imgWrap=document.querySelector('.pm-img-wrap');
+  if(imgWrap){
+    imgWrap.addEventListener('mousemove',e=>{
+      const rect=imgWrap.getBoundingClientRect();
+      const x=((e.clientX-rect.left)/rect.width)*100;
+      const y=((e.clientY-rect.top)/rect.height)*100;
+      imgWrap.style.setProperty('--zoom-x',x+'%');
+      imgWrap.style.setProperty('--zoom-y',y+'%');
+      imgWrap.classList.add('zoomed');
+    });
+    imgWrap.addEventListener('mouseleave',()=>{imgWrap.classList.remove('zoomed');});
+  }
+
+  /* ═══ PARTICLE ANIMATION ═══ */
+  (function(){
+    const canvas=document.getElementById('particleCanvas');
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    let w,h,particles=[];
+    function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+    resize();window.addEventListener('resize',resize);
+    function Particle(){
+      this.x=Math.random()*w;
+      this.y=Math.random()*h;
+      this.vx=(Math.random()-.5)*.3;
+      this.vy=(Math.random()-.5)*.3;
+      this.r=Math.random()*2+.5;
+      this.alpha=Math.random()*.3+.05;
+    }
+    for(let i=0;i<50;i++)particles.push(new Particle());
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      particles.forEach(p=>{
+        p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0)p.x=w;if(p.x>w)p.x=0;
+        if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(232,80,10,'+p.alpha+')';ctx.fill();
+      });
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+          const dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<120){
+            ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
+            ctx.strokeStyle='rgba(232,80,10,'+((.08)*(1-dist/120))+')';ctx.lineWidth=.5;ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  /* ═══ HERO CURSOR GLOW ═══ */
+  (function(){
+    const hero=document.querySelector('.hero');
+    const glow=document.getElementById('heroCursorGlow');
+    if(!hero||!glow)return;
+    hero.addEventListener('mousemove',e=>{
+      const rect=hero.getBoundingClientRect();
+      glow.style.left=(e.clientX-rect.left)+'px';
+      glow.style.top=(e.clientY-rect.top)+'px';
+    });
+  })();
+
+  /* ═══ PRODUCT CARD TILT ═══ */
+  document.querySelectorAll('.pc').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const rect=card.getBoundingClientRect();
+      const x=(e.clientX-rect.left)/rect.width-.5;
+      const y=(e.clientY-rect.top)/rect.height-.5;
+      card.style.transform='perspective(800px) rotateY('+x*8+'deg) rotateX('+(-y*8)+'deg) translateY(-10px)';
+    });
+    card.addEventListener('mouseleave',()=>{
+      card.style.transform='perspective(800px) rotateY(0) rotateX(0) translateY(0)';
+    });
+  });
 });
 </script>
 </body>
